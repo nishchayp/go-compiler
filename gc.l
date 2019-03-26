@@ -144,6 +144,11 @@
 	return COM;
 }
 
+"..." {
+	printf("%s", yytext);
+	return DOTS;
+}
+
 "(" {
 	printf("%s", yytext);
 	return LRB;
@@ -262,6 +267,11 @@
 [0-9] {
 	printf("%s", yytext);
 	return DECIMAL_DIGIT;
+}
+
+[a-zA-Z_][a-zA-Z_0-9]* {
+	printf("%s", yytext);
+	return IDENTIFIER;
 }
 
 %%
