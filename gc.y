@@ -182,24 +182,19 @@ Statement : IDENTIFIER
 /***********************************************************/
 %%
 
-int yyerror(char *msg)
-{
-printf("Invalid Expression\n");
-return 1;
-
+int yyerror(char *msg) {
+	printf("Invalid Expression\n");
+	return 1;
 }
-void main ()
-{
-printf("Enter the declaration stmt:\n");
-yyin=fopen("in.txt","r");
 
-do
-{
-	if(yyparse())
-	{
-	printf("failure");
-	exit(0);
-	}
-}while(!feof(yyin));
-printf("\nSuccess\n");
+void main (int argc, char const *argv[]) {
+	yyin=fopen(argv[1], "r");
+
+	do {
+		if(yyparse()) {
+			printf("failure");
+			exit(0);
+		}
+	} while (!feof(yyin));
+	printf("\nSuccess\n");
 }
