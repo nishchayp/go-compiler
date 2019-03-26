@@ -13,16 +13,11 @@ BREAK DEFAULT FUNC INTERFACE SELECT CASE DEFER GO
 MAP STRUCT CHAN ELSE GOTO PACKAGE SWITCH CONST 
 FALLTHROUGH IF RANGE TYPE CONTINUE FOR IMPORT RETURN VAR 
 
-SC COL COM DOTS LRB RRB LSB RSB LCB RCB
+SC COL COM DOTS DOT LRB RRB LSB RSB LCB RCB
 
 EQ ASSIGN PLUS MINUS STAR SLASH 
 INC DEC LOG_AND LOG_OR
 REL_OP ADD_OP MUL_OP UNARY_OP 
-E IOTA
-
-LETTER
-
-DECIMAL_DIGIT
 
 IDENTIFIER
 
@@ -57,46 +52,45 @@ StatementList: StatementList Statement SC
 
 
 /*************************Types*****************************/
-// Type: TypeName 
-// 	| TypeLit 
-// 	| LRB Type RRB 
-// 	;
-// TypeName: IDENTIFIER 
-// 	;
-// TypeLit: ArrayType 
-// 	| PointerType 
-// 	| FunctionType
-// 	;
-// ArrayType: LSB ArrayLength RSB ElementType
-// 	;
-// ArrayLength: Expression 
-// 	;
-// ElementType: Type 
-// 	;
-// PointerType: STAR BaseType
-// 	; 
-// BaseType: Type
-// 	;
-// FunctionType: FUNC Signature 
-// 	;
-// Signature: Parameters Result
-// 	| Parameters
-// 	;
-// Result: Parameters 
-// 	| Type 
-// 	;
-// Parameters: LRB ParameterList COM RRB
-// 	| LRB ParameterList RRB
-// 	| LRB RRB
-// 	;
-// ParameterList: ParameterList COM ParameterDecl
-// 	| ParameterDecl
-// 	;
-// ParameterDecl: IdentifierList DOTS Type
-// 	| IdentifierList Type
-// 	| DOTS Type
-// 	| Type
-// 	;
+Type: TypeName 
+	| TypeLit 
+	| LRB Type RRB 
+	;
+TypeName: IDENTIFIER 
+	;
+TypeLit: ArrayType 
+	| PointerType 
+	| FunctionType
+	;
+ArrayType: LSB ArrayLength RSB ElementType
+	;
+ArrayLength: Expression 
+	;
+ElementType: Type 
+	;
+PointerType: STAR BaseType
+	; 
+BaseType: Type
+	;
+FunctionType: FUNC Signature 
+	;
+Signature: Parameters Result
+	| Parameters
+	;
+Result: Parameters 
+	| Type 
+	;
+Parameters: LRB ParameterList RRB
+	| LRB RRB
+	;
+ParameterList: ParameterList COM ParameterDecl
+	| ParameterDecl
+	;
+ParameterDecl: IdentifierList DOTS Type
+	| IdentifierList Type
+	| DOTS Type
+	| Type
+	;
 /***********************************************************/
 
 
@@ -117,6 +111,14 @@ StatementList: StatementList Statement SC
 
 
 /***********************Constants***************************/
+// ConstDecl = "const" ( ConstSpec | "(" { ConstSpec ";" } ")" ) .
+// ConstSpec = IdentifierList [ [ Type ] "=" ExpressionList ] .
+IdentifierList: IdentifierList COM IDENTIFIER
+	| IDENTIFIER
+	;
+// ExpressionList: ExpressionList COM Expression
+// 	| Expression
+// 	;
 /***********************************************************/
 
 
@@ -151,6 +153,16 @@ FunctionBody: Block
 
 
 /**********************Oprators*****************************/
+Expression: UNARY_OP
+	| Expression binary_op Expression
+	;
+// UnaryExpr: PrimaryExpr 
+// 	| UnaryExpr UNARY_OP
+binary_op: LOG_OR 
+	| LOG_AND 
+	| REL_OP 
+	| ADD_OP 
+	| MUL_OP
 /***********************************************************/
 
 
@@ -167,17 +179,19 @@ FunctionBody: Block
 /************************Stubs*************************/
 ConstDecl: IDENTIFIER
 	;
-VarDecl: VAR
+VarDecl: VAR IdentifierList
 	;
-Signature: LRB RRB
-	;
+// PrimaryExpr: PrimaryExpr DOT IDENTIFIER
+	// ;
+// Signature: LRB RRB
+	// ;
 // Expression : IOTA
 // 	;
 // ExpressionList : IOTA
 // 	;
 // IdentifierList : IOTA
 // 	;
-Statement : IDENTIFIER
+Statement : RETURN IDENTIFIER
 	;
 /***********************************************************/
 %%

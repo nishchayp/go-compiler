@@ -149,6 +149,11 @@
 	return DOTS;
 }
 
+"." {
+	printf("%s", yytext);
+	return DOT;
+}
+
 "(" {
 	printf("%s", yytext);
 	return LRB;
@@ -247,26 +252,6 @@
 "+"|"-"|"!"|"^"|"*"|"&"|"<-" {
 	printf("%s", yytext);
 	return UNARY_OP;
-}
-
-"e"|"E" {
-	printf("%s", yytext);
-	return E;
-}
-
-"i" {
-	printf("%s", yytext);
-	return IOTA;
-}
-
-[a-zA-Z_] {
-	printf("%s", yytext);
-	return LETTER;
-}
-
-[0-9] {
-	printf("%s", yytext);
-	return DECIMAL_DIGIT;
 }
 
 [a-zA-Z_][a-zA-Z_0-9]* {
