@@ -261,7 +261,7 @@ decimal_digit [0-9]
 	return IDENTIFIER;
 }
 
-[1-9]{decimal_digit}* {
+{decimal_digit}+ {
 	printf("%s", yytext);
 	return INT_LIT;
 }

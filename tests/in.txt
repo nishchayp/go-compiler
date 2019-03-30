@@ -2,28 +2,81 @@ package main;
 
 import "fmt";
 
-func add(x int, y int) int {
-	var val int;
-}
-
-func divide(x float32, y float32) float32 {
-	var i, j int;
-	label1: var p, q, r int;
-	a := id;
-	
-	go 3 + 4;
-	return a, b + 3 ^ 99, 7 && 4;
-	break;
-	continue;
-	goto label1;
-	fallthrough;
-	if a := id; id {
-		var x, y char;
-	} else {
-		var x char;
-	};
+func div(x, y int) (int, int) {
+	// ReturnStmt
+	a := x / y;
+	b := x % y;
+	return a, b;
 }
 
 func main() {
+	// Declaration
+	var i, j int = 1, 2;
+	k := 3;
+	cpp, python3, golang := true, false, 3;
+	var c, python, java = true, false, 77;
+	var (
+		x, y int; 
+		z float32;
+		);
 
+	// LabeledStmt
+	label1: a := 3 ^ 4;
+
+	// SimpleStmt
+	a++;
+
+	// GoStmt
+	// go a;
+
+	// GotoStmt
+	goto label1;
+
+	// Block
+	{
+		b, c := 3 - 9, 43 / 3;
+		
+		// IfStmt
+		if a > b {
+			a--;
+		} else if a == b {
+			a = b;
+		} else {
+			b++;
+		};
+	};
+
+	// SwitchStmt
+	v := 42;
+	switch v {
+	case 100:
+		k = 100;
+		// FallthroughStmt
+		fallthrough;
+	case 42:
+		k = 42;
+		// BreakStmt
+		break;
+	case 1:
+		k = 1;
+		fallthrough;
+	default:
+		k++;
+	};
+
+	// ForStmt
+	sum := 0;
+	for i := 0; i < 10; i++ {
+		if (i == 5) {
+			// ContinueStmt
+			continue;
+		};
+		sum = sum + i;
+	};
+
+	// DeferStmt
+	defer c & 3;
+	
+	// div(10, 3);
+	// a += b;
 };

@@ -242,6 +242,9 @@ Statement: Declaration
 	| FallthroughStmt
 	| Block
 	| IfStmt
+	| SwitchStmt
+	| ForStmt
+	| DeferStmt
 	;
 // SimpleStmt = EmptyStmt | ExpressionStmt | IncDecStmt | Assignment | ShortVarDecl .
 SimpleStmt: EmptyStmt 
@@ -285,21 +288,70 @@ IfStmt: IF SimpleStmt SC Expression Block ELSE IfStmt
 	| IF Expression Block
 	;
 // SwitchStmt = ExprSwitchStmt | TypeSwitchStmt .
+SwitchStmt: ExprSwitchStmt 
+	| TypeSwitchStmt
+	;
 // ExprSwitchStmt = "switch" [ SimpleStmt ";" ] [ Expression ] "{" { ExprCaseClause } "}" .
+ExprSwitchStmt: SWITCH SimpleStmt SC Expression LCB ExprCaseClause RCB
+	| SWITCH SimpleStmt SC LCB ExprCaseClause RCB
+	| SWITCH Expression LCB ExprCaseClause RCB
+	| SWITCH LCB ExprCaseClause RCB
+	;
 // ExprCaseClause = ExprSwitchCase ":" StatementList .
+ExprCaseClause: ExprCaseClause ExprSwitchCase COL StatementList
+	|
+	;
 // ExprSwitchCase = "case" ExpressionList | "default" .
+ExprSwitchCase: CASE ExpressionList 
+	| DEFAULT
+	;
 // TypeSwitchStmt = "switch" [ SimpleStmt ";" ] TypeSwitchGuard "{" { TypeCaseClause } "}" .
+TypeSwitchStmt: SWITCH SimpleStmt SC TypeSwitchGuard LCB TypeCaseClause RCB
+	| SWITCH TypeSwitchGuard LCB TypeCaseClause RCB
+	;
 // TypeSwitchGuard = [ identifier ":=" ] PrimaryExpr "." "(" "type" ")" .
+TypeSwitchGuard: IDENTIFIER ASSIGN PrimaryExpr DOT LRB TYPE RRB
+	| PrimaryExpr DOT LRB TYPE RRB
+	;
 // TypeCaseClause = TypeSwitchCase ":" StatementList .
+TypeCaseClause: TypeCaseClause TypeSwitchCase COL StatementList
+	|
+	;
 // TypeSwitchCase = "case" TypeList | "default" .
+TypeSwitchCase: CASE TypeList 
+	| DEFAULT
 // TypeList = Type { "," Type } .
+TypeList: TypeList COM Type
+	| Type
+	;
 // ForStmt = "for" [ Condition | ForClause | RangeClause ] Block .
+ForStmt: FOR Condition Block
+	| FOR ForClause Block
+	| FOR RangeClause Block
+	| FOR Block
+	;
 // Condition = Expression .
+Condition: Expression
+	|
+	;
 // ForClause = [ InitStmt ] ";" [ Condition ] ";" [ PostStmt ] .
+ForClause: InitStmt SC Condition SC PostStmt
 // InitStmt = SimpleStmt .
+InitStmt: SimpleStmt
+	|
+	;
 // PostStmt = SimpleStmt .
+PostStmt: SimpleStmt
+	|
+	;
 // RangeClause = [ ExpressionList "=" | IdentifierList ":=" ] "range" Expression .
+RangeClause: ExpressionList EQ RANGE Expression
+	| IdentifierList ASSIGN RANGE Expression
+	| RANGE Expression
+	;
 // DeferStmt = "defer" Expression .
+DeferStmt: DEFER Expression
+	;
 // EmptyStmt = .
 EmptyStmt:
 	;
