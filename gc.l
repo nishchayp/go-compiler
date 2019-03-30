@@ -2,7 +2,13 @@
 #include "gc.tab.h"
 %}
 
+decimal_digit [0-9]
+
 %%
+
+"//".*"\n" {
+	printf("%s", yytext);
+}
 
 "break" {
 	printf("%s", yytext);
@@ -194,25 +200,6 @@
 	return ASSIGN;
 }
 
-"+" {
-	printf("%s", yytext);
-	return PLUS;
-}
-
-"-" {
-	printf("%s", yytext);
-	return MINUS;
-}
-
-"*" {
-	printf("%s", yytext);
-	return STAR;
-}
-
-"/" {
-	printf("%s", yytext);
-	return SLASH;
-}
 
 "++" {
 	printf("%s", yytext);
@@ -234,29 +221,49 @@
 	return LOG_OR;
 }
 
+"*" {
+	printf("%s", yytext);
+	return STAR;
+}
+
+"|" {
+	printf("%s", yytext);
+	return PIPE;
+}
+
+"&" {
+	printf("%s", yytext);
+	return AND;
+}
+
 "=="|"!="|"<"|"<="|">"|">=" {
 	printf("%s", yytext);
 	return REL_OP;
 }
 
-"+"|"-"|"|"|"^" {
+"+"|"-"|"^" {
 	printf("%s", yytext);
-	return ADD_OP;
+	return PAR_ADD_OP;
 }
 
-"*"|"/"|"%"|"<<"|">>"|"&"|"&^" {
+"/"|"%"|"<<"|">>"|"&^" {
 	printf("%s", yytext);
-	return MUL_OP;
+	return PAR_MUL_OP;
 }
 
-"+"|"-"|"!"|"^"|"*"|"&"|"<-" {
+"!"|"<-" {
 	printf("%s", yytext);
-	return UNARY_OP;
+	return PAR_UNARY_OP;
 }
 
 [a-zA-Z_][a-zA-Z_0-9]* {
 	printf("%s", yytext);
 	return IDENTIFIER;
+}
+
+[1-9]{decimal_digit}* {
+	printf("%s", yytext);
+	return INT_LIT;
 }
 
 %%

@@ -3,11 +3,25 @@ package main;
 import "fmt";
 
 func add(x int, y int) int {
-	return x;
+	var val int;
 }
 
 func divide(x float32, y float32) float32 {
-	return x;
+	var i, j int;
+	label1: var p, q, r int;
+	a := id;
+	
+	go 3 + 4;
+	return a, b + 3 ^ 99, 7 && 4;
+	break;
+	continue;
+	goto label1;
+	fallthrough;
+	if a := id; id {
+		var x, y char;
+	} else {
+		var x char;
+	};
 }
 
 func main() {
