@@ -95,7 +95,11 @@ extern int yydebug;
     PAR_MUL_OP = 305,
     PAR_UNARY_OP = 306,
     INT_LIT = 307,
-    IDENTIFIER = 308
+    FLOAT_LIT = 308,
+    IMAGINARY_LIT = 309,
+    RUNE_LIT = 310,
+    STRING_LIT = 311,
+    IDENTIFIER = 312
   };
 #endif
 

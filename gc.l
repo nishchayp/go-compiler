@@ -3,6 +3,7 @@
 %}
 
 decimal_digit [0-9]
+exponent [eE][+-]?{decimal_digit}+
 
 %%
 
@@ -264,6 +265,26 @@ decimal_digit [0-9]
 {decimal_digit}+ {
 	printf("%s", yytext);
 	return INT_LIT;
+}
+
+{decimal_digit}+"."{decimal_digit}*|{decimal_digit}+{exponent}|"."{decimal_digit}+{exponent}? {
+	printf("%s", yytext);
+	return FLOAT_LIT;
+}
+
+({decimal_digit}+|({decimal_digit}+"."{decimal_digit}*|{decimal_digit}+{exponent}|"."{decimal_digit}+{exponent}?))"i" {
+	printf("%s", yytext);
+	return IMAGINARY_LIT;
+}
+
+"'"[a-zA-Z_0-9]"'" {
+	printf("%s", yytext);
+	return RUNE_LIT;
+}
+
+"\"".*"\"" {
+	printf("%s", yytext);
+	return STRING_LIT;
 }
 
 %%

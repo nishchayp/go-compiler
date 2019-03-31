@@ -77,6 +77,12 @@ func main() {
 	// DeferStmt
 	defer c & 3;
 	
-	// div(10, 3);
+	div(10, 3);
+	fmt.Println(34E99);
+	fmt.Println(.44E+12);
+	fmt.Println(.44E+12i);
+	fmt.Println(32i);
+	fmt.Println('q');
+	fmt.Println("hello world");
 	// a += b;
 };

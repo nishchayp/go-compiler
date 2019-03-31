@@ -18,7 +18,7 @@ EQ ASSIGN STAR PIPE AND
 INC DEC LOG_AND LOG_OR
 REL_OP PAR_ADD_OP PAR_MUL_OP PAR_UNARY_OP
 
-INT_LIT 
+INT_LIT FLOAT_LIT IMAGINARY_LIT RUNE_LIT STRING_LIT
 
 IDENTIFIER
 
@@ -34,6 +34,7 @@ SourceFile: PackageClause SC ImportDecl SC TopLevelDecl SC
 PackageClause: PACKAGE PackageName
 	;
 PackageName: IDENTIFIER
+	| STRING_LIT
 	;
 ImportDecl: ImportDecl IMPORT PackageName
 	|
@@ -196,12 +197,27 @@ PrimaryExpr: Operand
 	| PrimaryExpr Selector
 	| PrimaryExpr Index
 	| PrimaryExpr TypeAsertion
+	| PrimaryExpr Arguments
 	;
 Selector: DOT IDENTIFIER
 	;
 Index: LSB Expression RSB
 	;
 TypeAsertion: DOT LRB Type RRB
+// Arguments = "(" [ ( ExpressionList | Type [ "," ExpressionList ] ) [ "..." ] [ "," ] ] ")" .
+Arguments: LRB ExpressionList DOTS COM RRB
+	| LRB ExpressionList DOTS RRB
+	| LRB ExpressionList COM RRB
+	| LRB ExpressionList RRB
+	| LRB Type OptionArguments DOTS COM RRB
+	| LRB Type OptionArguments DOTS RRB
+	| LRB Type OptionArguments COM RRB
+	| LRB Type OptionArguments RRB
+	| LRB RRB
+	;
+OptionArguments: COM Expression
+	|
+	;
 /***********************************************************/
 
 
@@ -213,12 +229,12 @@ Operand: Literal
 	;
 Literal: BasicLit
 	;
-// BasicLit: INT_LIT 
-// 	| float_lit 
-// 	| imaginary_lit 
-// 	| rune_lit 
-// 	| string_lit
-// 	;
+BasicLit: INT_LIT 
+	| FLOAT_LIT
+	| IMAGINARY_LIT 
+	| RUNE_LIT 
+	| STRING_LIT
+	;
 OperandName: IDENTIFIER
 	;
 
@@ -390,8 +406,8 @@ assign_op: add_op EQ
 // 	;
 // Statement : RETURN IDENTIFIER
 // 	;
-BasicLit: INT_LIT 
-	;
+// BasicLit: INT_LIT 
+// 	;
 /***********************************************************/
 %%
 
