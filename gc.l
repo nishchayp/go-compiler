@@ -1,7 +1,9 @@
 %{
 #include "gc.tab.h"
+int yycolumn = 0, last_column;
+#define YY_USER_ACTION yycolumn += yyleng;
 %}
-
+%option yylineno
 decimal_digit [0-9]
 exponent [eE][+-]?{decimal_digit}+
 
@@ -9,6 +11,12 @@ exponent [eE][+-]?{decimal_digit}+
 
 "//".*"\n" {
 	printf("%s", yytext);
+}
+
+"\n" {
+	printf("%s", yytext);
+	last_column=yycolumn;
+	yycolumn=1;
 }
 
 "break" {
@@ -208,7 +216,7 @@ exponent [eE][+-]?{decimal_digit}+
 }
 
 "--" {
-	printf("%s", yytext);
+	printf("%s", yytext);	
 	return DEC;
 }
 
@@ -287,7 +295,20 @@ exponent [eE][+-]?{decimal_digit}+
 	return STRING_LIT;
 }
 
+. {
+	printf("%s", yytext);
+}
+
+
 %%
+
+int yyerror(char const *msg, YYLTYPE yylloc) {
+	if (strcmp(yytext, "\n") != 0)
+		printf("\nError: %d %d %s\n", yylineno, yycolumn, msg);
+	else
+		printf("\nError: %d %d %s\n", yylineno, last_column, msg);
+	return 1;
+}
 
 int yywrap()
 {

@@ -6,6 +6,9 @@ int yyerror();
 extern FILE *yyin;
 %}
 
+%define parse.error verbose
+%locations 
+%define api.pure
 %token 
 
 BREAK DEFAULT FUNC INTERFACE SELECT CASE DEFER GO 
@@ -411,17 +414,17 @@ assign_op: add_op EQ
 /***********************************************************/
 %%
 
-int yyerror(char *msg) {
-	printf("Invalid Expression\n");
-	return 1;
-}
+// int yyerror(char const *msg) {
+// 	printf("\nError: %d %s\n", yylineno, msg);
+// 	return 1;
+// }
 
 void main (int argc, char const *argv[]) {
 	yyin=fopen(argv[1], "r");
 
 	do {
 		if(yyparse()) {
-			printf("failure");
+			printf("failure\n");
 			exit(0);
 		}
 	} while (!feof(yyin));
