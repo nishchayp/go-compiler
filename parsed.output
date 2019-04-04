@@ -20,7 +20,7 @@ func main() {
 		z float32;
 		);
 	
-	var a int = 0;
+	var a int := 0
 	// SimpleStmt
 	a++;
 
@@ -80,7 +80,7 @@ func main() {
 	
 	div(10, 3);
 	fmt.Println(34E99);
-	fmt.Println(..44E+12);
+	fmt.Println(.44E+12);
 	fmt.Println(.44E+12i);
 	fmt.Println(32i);
 	fmt.Println('q');

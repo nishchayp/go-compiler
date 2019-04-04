@@ -581,10 +581,14 @@ char *yytext;
 #line 1 "gc.l"
 #line 2 "gc.l"
 #include "gc.tab.h"
-int yycolumn = 0, last_column;
+#include "symbol_table.h"
+int yycolumn = 1;
 #define YY_USER_ACTION yycolumn += yyleng;
-#line 587 "lex.yy.c"
-#line 588 "lex.yy.c"
+FILE *fp_out;
+
+
+#line 591 "lex.yy.c"
+#line 592 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -801,10 +805,10 @@ YY_DECL
 		}
 
 	{
-#line 10 "gc.l"
+#line 14 "gc.l"
 
 
-#line 808 "lex.yy.c"
+#line 812 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -874,474 +878,484 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 12 "gc.l"
+#line 16 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 }
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 16 "gc.l"
+#line 20 "gc.l"
 {
-	printf("%s", yytext);
-	last_column=yycolumn;
-	yycolumn=1;
+	fprintf(fp_out, "%s", yytext);
+	yycolumn = 1;
 }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 22 "gc.l"
+#line 25 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return BREAK;
 }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 27 "gc.l"
+#line 30 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return DEFAULT;
 }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 32 "gc.l"
+#line 35 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
+	is_func = 1;
 	return FUNC;
 }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 37 "gc.l"
+#line 41 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return INTERFACE;
 }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 42 "gc.l"
+#line 46 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return SELECT;
 }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 47 "gc.l"
+#line 51 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return CASE;
 }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 52 "gc.l"
+#line 56 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return DEFER;
 }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 57 "gc.l"
+#line 61 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return GO;
 }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 62 "gc.l"
+#line 66 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return MAP;
 }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 67 "gc.l"
+#line 71 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return STRUCT;
 }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 72 "gc.l"
+#line 76 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return CHAN;
 }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 77 "gc.l"
+#line 81 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return ELSE;
 }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 82 "gc.l"
+#line 86 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return GOTO;
 }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 87 "gc.l"
+#line 91 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return PACKAGE;
 }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 92 "gc.l"
+#line 96 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return SWITCH;
 }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 97 "gc.l"
+#line 101 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return CONST;
 }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 102 "gc.l"
+#line 106 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return FALLTHROUGH;
 }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 107 "gc.l"
+#line 111 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return IF;
 }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 112 "gc.l"
+#line 116 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return RANGE;
 }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 117 "gc.l"
+#line 121 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return TYPE;
 }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 122 "gc.l"
+#line 126 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return CONTINUE;
 }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 127 "gc.l"
+#line 131 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return FOR;
 }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 132 "gc.l"
+#line 136 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return IMPORT;
 }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 137 "gc.l"
+#line 141 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return RETURN;
 }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 142 "gc.l"
+#line 146 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return VAR;
 }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 147 "gc.l"
+#line 151 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return SC;
 }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 152 "gc.l"
+#line 156 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return COL;
 }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 157 "gc.l"
+#line 161 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return COM;
 }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 162 "gc.l"
+#line 166 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return DOTS;
 }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 167 "gc.l"
+#line 171 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return DOT;
 }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 172 "gc.l"
+#line 176 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return LRB;
 }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 177 "gc.l"
+#line 181 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return RRB;
 }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 182 "gc.l"
+#line 186 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return LSB;
 }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 187 "gc.l"
+#line 191 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return RSB;
 }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 192 "gc.l"
+#line 196 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return LCB;
 }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 197 "gc.l"
+#line 201 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return RCB;
 }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 202 "gc.l"
+#line 206 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return EQ;
 }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 207 "gc.l"
+#line 211 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return ASSIGN;
 }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 213 "gc.l"
+#line 217 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return INC;
 }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 218 "gc.l"
+#line 222 "gc.l"
 {
-	printf("%s", yytext);	
+	fprintf(fp_out, "%s", yytext);	
 	return DEC;
 }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 223 "gc.l"
+#line 227 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return LOG_AND;
 }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 228 "gc.l"
+#line 232 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return LOG_OR;
 }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 233 "gc.l"
+#line 237 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return STAR;
 }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 238 "gc.l"
+#line 242 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return PIPE;
 }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 243 "gc.l"
+#line 247 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return AND;
 }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 248 "gc.l"
+#line 252 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return REL_OP;
 }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 253 "gc.l"
+#line 257 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return PAR_ADD_OP;
 }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 258 "gc.l"
+#line 262 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return PAR_MUL_OP;
 }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 263 "gc.l"
+#line 267 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return PAR_UNARY_OP;
 }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 268 "gc.l"
+#line 272 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
+	if (is_func == 1) {
+		is_func = 0;
+		insert(yytext, "FUNC", yylineno, -1, "ipsum", 'L', arr);
+	} else {
+		insert(yytext, "Identifier", yylineno, -1, "ipsum", 'L', arr);
+	}
 	return IDENTIFIER;
 }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 273 "gc.l"
+#line 283 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
+	insert(yytext, "Integer Literal", yylineno, -1, "ipsum", 'L', arr);
 	return INT_LIT;
 }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 278 "gc.l"
+#line 289 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
+	insert(yytext, "Float Literal", yylineno, -1, "ipsum", 'L', arr);
 	return FLOAT_LIT;
 }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 283 "gc.l"
+#line 295 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
+	insert(yytext, "Imaginary Literal", yylineno, -1, "ipsum", 'L', arr);
 	return IMAGINARY_LIT;
 }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 288 "gc.l"
+#line 301 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return RUNE_LIT;
 }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 293 "gc.l"
+#line 306 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
+	insert(yytext, "String Literal", yylineno, -1, "ipsum", 'L', arr);
 	return STRING_LIT;
 }
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 298 "gc.l"
+#line 312 "gc.l"
 {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 }
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 303 "gc.l"
+#line 317 "gc.l"
 ECHO;
 	YY_BREAK
-#line 1345 "lex.yy.c"
+#line 1359 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2358,19 +2372,16 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 303 "gc.l"
+#line 317 "gc.l"
 
 
 int yyerror(char const *msg, YYLTYPE yylloc) {
-	if (strcmp(yytext, "\n") != 0)
-		printf("\nError: %d %d %s\n", yylineno, yycolumn, msg);
-	else
-		printf("\nError: %d %d %s\n", yylineno, last_column, msg);
+	printf("\nError on line %d: %d %s\n", yylineno, yycolumn - yyleng, msg);
 	return 1;
 }
 
-int yywrap()
-{
+int yywrap() {
+	print_sym_tbl();
 	return 1;
 }
 

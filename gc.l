@@ -1,7 +1,11 @@
 %{
 #include "gc.tab.h"
-int yycolumn = 0, last_column;
+#include "symbol_table.h"
+int yycolumn = 1;
 #define YY_USER_ACTION yycolumn += yyleng;
+FILE *fp_out;
+
+
 %}
 %option yylineno
 decimal_digit [0-9]
@@ -10,307 +14,314 @@ exponent [eE][+-]?{decimal_digit}+
 %%
 
 "//".*"\n" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 }
 
 "\n" {
-	printf("%s", yytext);
-	last_column=yycolumn;
-	yycolumn=1;
+	fprintf(fp_out, "%s", yytext);
+	yycolumn = 1;
 }
 
 "break" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return BREAK;
 }
 
 "default" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return DEFAULT;
 }
 
 "func" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
+	is_func = 1;
 	return FUNC;
 }
 
 "interface" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return INTERFACE;
 }
 
 "select" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return SELECT;
 }
 
 "case" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return CASE;
 }
 
 "defer" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return DEFER;
 }
 
 "go" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return GO;
 }
 
 "map" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return MAP;
 }
 
 "struct" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return STRUCT;
 }
 
 "chan" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return CHAN;
 }
 
 "else" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return ELSE;
 }
 
 "goto" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return GOTO;
 }
 
 "package" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return PACKAGE;
 }
 
 "switch" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return SWITCH;
 }
 
 "const" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return CONST;
 }
 
 "fallthrough" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return FALLTHROUGH;
 }
 
 "if" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return IF;
 }
 
 "range" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return RANGE;
 }
 
 "type" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return TYPE;
 }
 
 "continue" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return CONTINUE;
 }
 
 "for" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return FOR;
 }
 
 "import" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return IMPORT;
 }
 
 "return" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return RETURN;
 }
 
 "var" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return VAR;
 }
 
 ";" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return SC;
 }
 
 ":" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return COL;
 }
 
 "," {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return COM;
 }
 
 "..." {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return DOTS;
 }
 
 "." {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return DOT;
 }
 
 "(" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return LRB;
 }
 
 ")" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return RRB;
 }
 
 "[" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return LSB;
 }
 
 "]" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return RSB;
 }
 
 "{" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return LCB;
 }
 
 "}" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return RCB;
 }
 
 "=" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return EQ;
 }
 
 ":=" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return ASSIGN;
 }
 
 
 "++" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return INC;
 }
 
 "--" {
-	printf("%s", yytext);	
+	fprintf(fp_out, "%s", yytext);	
 	return DEC;
 }
 
 "&&" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return LOG_AND;
 }
 
 "||" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return LOG_OR;
 }
 
 "*" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return STAR;
 }
 
 "|" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return PIPE;
 }
 
 "&" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return AND;
 }
 
 "=="|"!="|"<"|"<="|">"|">=" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return REL_OP;
 }
 
 "+"|"-"|"^" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return PAR_ADD_OP;
 }
 
 "/"|"%"|"<<"|">>"|"&^" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return PAR_MUL_OP;
 }
 
 "!"|"<-" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return PAR_UNARY_OP;
 }
 
 [a-zA-Z_][a-zA-Z_0-9]* {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
+	if (is_func == 1) {
+		is_func = 0;
+		insert(yytext, "FUNC", yylineno, -1, "ipsum", 'L', arr);
+	} else {
+		insert(yytext, "Identifier", yylineno, -1, "ipsum", 'L', arr);
+	}
 	return IDENTIFIER;
 }
 
 {decimal_digit}+ {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
+	insert(yytext, "Integer Literal", yylineno, -1, "ipsum", 'L', arr);
 	return INT_LIT;
 }
 
 {decimal_digit}+"."{decimal_digit}*|{decimal_digit}+{exponent}|"."{decimal_digit}+{exponent}? {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
+	insert(yytext, "Float Literal", yylineno, -1, "ipsum", 'L', arr);
 	return FLOAT_LIT;
 }
 
 ({decimal_digit}+|({decimal_digit}+"."{decimal_digit}*|{decimal_digit}+{exponent}|"."{decimal_digit}+{exponent}?))"i" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
+	insert(yytext, "Imaginary Literal", yylineno, -1, "ipsum", 'L', arr);
 	return IMAGINARY_LIT;
 }
 
 "'"[a-zA-Z_0-9]"'" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 	return RUNE_LIT;
 }
 
 "\"".*"\"" {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
+	insert(yytext, "String Literal", yylineno, -1, "ipsum", 'L', arr);
 	return STRING_LIT;
 }
 
 . {
-	printf("%s", yytext);
+	fprintf(fp_out, "%s", yytext);
 }
 
 
 %%
 
 int yyerror(char const *msg, YYLTYPE yylloc) {
-	if (strcmp(yytext, "\n") != 0)
-		printf("\nError: %d %d %s\n", yylineno, yycolumn, msg);
-	else
-		printf("\nError: %d %d %s\n", yylineno, last_column, msg);
+	printf("\nError on line %d: %d %s\n", yylineno, yycolumn - yyleng, msg);
 	return 1;
 }
 
-int yywrap()
-{
+int yywrap() {
+	print_sym_tbl();
 	return 1;
 }
