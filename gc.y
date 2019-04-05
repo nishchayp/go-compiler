@@ -10,6 +10,7 @@ extern FILE *fp_out;
 %define parse.error verbose
 %locations 
 %define api.pure
+
 %token 
 
 BREAK DEFAULT FUNC INTERFACE SELECT CASE DEFER GO 
@@ -146,6 +147,7 @@ Declaration: ConstDecl
 	;
 TopLevelDecl: TopLevelDecl Declaration
 	| TopLevelDecl FuncDecl
+	| error
 	|
 	;
 /***********************************************************/

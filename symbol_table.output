@@ -1,46 +1,17 @@
-|IDX|NAME           |TYPE              |SZ |#ARG|RET. |SCP|ARGS
-|2  |42             |Integer Literal   |51 |-1  |ipsum|L  |
-|3  |43             |Integer Literal   |38 |-1  |ipsum|L  |
-|5  |i              |Identifier        |14 |-1  |ipsum|L  |
-|5  |"bye world!"   |String Literal    |79 |-1  |ipsum|L  |
-|6  |j              |Identifier        |14 |-1  |ipsum|L  |
-|6  |32i            |Imaginary Literal |85 |-1  |ipsum|L  |
-|7  |k              |Identifier        |15 |-1  |ipsum|L  |
-|10 |77             |Integer Literal   |17 |-1  |ipsum|L  |
-|16 |t              |Identifier        |34 |-1  |ipsum|L  |
-|18 |java           |Identifier        |17 |-1  |ipsum|L  |
-|18 |v              |Identifier        |51 |-1  |ipsum|L  |
-|20 |x              |Identifier        |5  |-1  |ipsum|L  |
-|21 |main           |Identifier        |1  |-1  |ipsum|L  |
-|21 |y              |Identifier        |5  |-1  |ipsum|L  |
-|22 |z              |Identifier        |20 |-1  |ipsum|L  |
-|23 |div            |FUNC              |5  |-1  |ipsum|L  |
-|23 |cpp            |Identifier        |16 |-1  |ipsum|L  |
-|23 |false          |Identifier        |16 |-1  |ipsum|L  |
-|25 |python3        |Identifier        |16 |-1  |ipsum|L  |
-|27 |fmt            |Identifier        |79 |-1  |ipsum|L  |
-|31 |int            |Identifier        |5  |-1  |ipsum|L  |
-|32 |golang         |Identifier        |16 |-1  |ipsum|L  |
-|35 |float32        |Identifier        |20 |-1  |ipsum|L  |
-|41 |sum            |Identifier        |69 |-1  |ipsum|L  |
-|43 |Println        |Identifier        |79 |-1  |ipsum|L  |
-|45 |100            |Integer Literal   |53 |-1  |ipsum|L  |
-|48 |true           |Identifier        |16 |-1  |ipsum|L  |
-|48 |0              |Integer Literal   |23 |-1  |ipsum|L  |
-|49 |1              |Integer Literal   |14 |-1  |ipsum|L  |
-|50 |2              |Integer Literal   |14 |-1  |ipsum|L  |
-|51 |3              |Integer Literal   |15 |-1  |ipsum|L  |
-|52 |4              |Integer Literal   |34 |-1  |ipsum|L  |
-|53 |5              |Integer Literal   |71 |-1  |ipsum|L  |
-|57 |9              |Integer Literal   |38 |-1  |ipsum|L  |
-|61 |label1         |Identifier        |31 |-1  |ipsum|L  |
-|61 |.44E+12        |Float Literal     |83 |-1  |ipsum|L  |
-|66 |.44E+12i       |Imaginary Literal |84 |-1  |ipsum|L  |
-|74 |python         |Identifier        |17 |-1  |ipsum|L  |
-|84 |"hello world"  |String Literal    |87 |-1  |ipsum|L  |
-|86 |34E99          |Float Literal     |82 |-1  |ipsum|L  |
-|95 |"fmt"          |String Literal    |3  |-1  |ipsum|L  |
-|97 |a              |Identifier        |7  |-1  |ipsum|L  |
-|97 |10             |Integer Literal   |70 |-1  |ipsum|L  |
-|98 |b              |Identifier        |8  |-1  |ipsum|L  |
-|99 |c              |Identifier        |17 |-1  |ipsum|L  |
+|IDX|NAME           |TYPE              |LINE |COL  |
+|7  |if             |Keyword           |12   |5    |
+|10 |n              |Variable          |11   |11   |
+|14 |fact           |FUNC              |11   |6    |
+|16 |package        |Keyword           |5    |1    |
+|21 |main           |Variable          |5    |9    |
+|27 |fmt            |Variable          |19   |5    |
+|28 |func           |Keyword           |11   |1    |
+|31 |int            |Variable          |11   |13   |
+|43 |Println        |Variable          |19   |10   |
+|48 |0              |Integer Literal   |12   |13   |
+|49 |1              |Integer Literal   |13   |19   |
+|55 |7              |Integer Literal   |19   |23   |
+|67 |import         |Keyword           |7    |1    |
+|72 |return         |Keyword           |13   |9    |
+|95 |"fmt"          |String Literal    |7    |8    |
+|95 |ab             |Variable          |13   |16   |
