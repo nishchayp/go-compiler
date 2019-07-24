@@ -1,17 +1,63 @@
 |IDX|NAME           |TYPE              |LINE |COL  |
-|7  |if             |Keyword           |12   |5    |
-|10 |n              |Variable          |11   |11   |
-|14 |fact           |FUNC              |11   |6    |
-|16 |package        |Keyword           |5    |1    |
-|21 |main           |Variable          |5    |9    |
-|27 |fmt            |Variable          |19   |5    |
-|28 |func           |Keyword           |11   |1    |
-|31 |int            |Variable          |11   |13   |
-|43 |Println        |Variable          |19   |10   |
-|48 |0              |Integer Literal   |12   |13   |
-|49 |1              |Integer Literal   |13   |19   |
-|55 |7              |Integer Literal   |19   |23   |
-|67 |import         |Keyword           |7    |1    |
-|72 |return         |Keyword           |13   |9    |
-|95 |"fmt"          |String Literal    |7    |8    |
-|95 |ab             |Variable          |13   |16   |
+|2  |42             |Integer Literal   |51   |10   |
+|3  |43             |Integer Literal   |38   |24   |
+|5  |i              |Variable          |14   |9    |
+|5  |"bye world!"   |String Literal    |79   |23   |
+|6  |j              |Variable          |14   |12   |
+|6  |32i            |Imaginary Literal |85   |17   |
+|7  |k              |Variable          |15   |5    |
+|7  |if             |Keyword           |41   |9    |
+|10 |77             |Integer Literal   |17   |41   |
+|12 |case           |Keyword           |53   |9    |
+|14 |kk             |Variable          |8    |9    |
+|16 |package        |Keyword           |1    |1    |
+|16 |t              |Variable          |34   |13   |
+|17 |break          |Keyword           |60   |13   |
+|18 |java           |Variable          |17   |21   |
+|18 |v              |Variable          |51   |5    |
+|18 |defer          |Keyword           |79   |5    |
+|20 |x              |Variable          |5    |10   |
+|21 |main           |Variable          |1    |9    |
+|21 |y              |Variable          |5    |13   |
+|22 |z              |Variable          |20   |9    |
+|23 |div            |FUNC              |5    |6    |
+|23 |cpp            |Variable          |16   |5    |
+|23 |false          |Variable          |16   |35   |
+|25 |python3        |Variable          |16   |10   |
+|25 |else           |Keyword           |43   |11   |
+|27 |for            |Keyword           |70   |5    |
+|27 |fmt            |Variable          |79   |11   |
+|28 |func           |Keyword           |5    |1    |
+|29 |var            |Keyword           |14   |5    |
+|31 |int            |Variable          |5    |15   |
+|32 |golang         |Variable          |16   |19   |
+|35 |float32        |Variable          |20   |11   |
+|41 |goto           |Keyword           |31   |5    |
+|41 |default        |Keyword           |64   |9    |
+|41 |sum            |Variable          |69   |5    |
+|43 |Println        |Variable          |79   |15   |
+|45 |100            |Integer Literal   |53   |14   |
+|48 |true           |Variable          |16   |29   |
+|48 |0              |Integer Literal   |23   |17   |
+|49 |1              |Integer Literal   |14   |20   |
+|50 |2              |Integer Literal   |14   |23   |
+|51 |3              |Integer Literal   |15   |10   |
+|52 |4              |Integer Literal   |34   |22   |
+|53 |5              |Integer Literal   |71   |18   |
+|57 |9              |Integer Literal   |38   |21   |
+|58 |switch         |Keyword           |52   |5    |
+|61 |label1         |Variable          |31   |10   |
+|61 |.44E+12        |Float Literal     |83   |18   |
+|66 |.44E+12i       |Imaginary Literal |84   |17   |
+|67 |import         |Keyword           |3    |1    |
+|69 |continue       |Keyword           |73   |13   |
+|72 |return         |Keyword           |9    |5    |
+|74 |python         |Variable          |17   |12   |
+|84 |fallthrough    |Keyword           |56   |13   |
+|84 |"hello world"  |String Literal    |87   |17   |
+|86 |34E99          |Float Literal     |82   |17   |
+|95 |"fmt"          |String Literal    |3    |8    |
+|97 |a              |Variable          |7    |5    |
+|97 |10             |Integer Literal   |70   |21   |
+|98 |b              |Variable          |8    |5    |
+|99 |c              |Variable          |17   |9    |

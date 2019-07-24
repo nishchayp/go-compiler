@@ -1,3 +1,3 @@
 #!/bin/bash
 
-bison -d gc.y && flex gc.l && gcc lex.yy.c gc.tab.c && ./a.out $1
+bison -d gc.y && flex gc.l && gcc -o gc lex.yy.c gc.tab.c && ./gc $1
